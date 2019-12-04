@@ -6,10 +6,14 @@ const readline = require('readline').createInterface({
 })
 
 
-readline.question(`ID de sesión?`, (name) => {
-    console.log(`Hi ${name}!`);
+readline.question(`Introduce la url de un apartado: `, (name) => {
+    var url = new URL(name);
+    var sessKey = url.searchParams.get('sesskey');
+    console.log(`Hi ${sessKey}!`);
     readline.close();
-    setInterval(function () { callAxios(name)} ,30000);   
+    setInterval(function () {
+        callAxios(sessKey)
+    }, 30000);
 });
 function test() {
     console.log('Testing!');
